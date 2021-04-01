@@ -1,7 +1,5 @@
-const { DataTypes } = require("sequelize");
-
-module.exports = (sequelize) => {
-  sequelize.define("address", {
+module.exports = (sequelize, DataTypes) => {
+  const Address = sequelize.define("address", {
     street: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -20,4 +18,5 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
   });
+  return Address;
 };
