@@ -1,7 +1,20 @@
-const router = require("express").Router();
-const User = require("../db").import("../models/user");
-const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const { Router } = require("express");
+const { User } = require("../models");
+const validateSession = require("../middleware/validate-session");
+
+const router = Router();
+router.get("/get", function (req, res) {
+  User.findAll({ where: { id: 1 }, include: ["babyinfo"] }).then(
+    function findOneSuccess(data) {
+      res.json(data);
+    },
+    function findOneError(err) {
+      res.send(500, err.message);
+    }
+  );
+});
 
 router.post("/create", function (req, res) {
   User.create({
